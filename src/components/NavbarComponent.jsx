@@ -4,7 +4,7 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 
 export default function NavbarComponent() {
   return (
-    <Navbar bg="dark" variant="dark" expand="md">
+    <Navbar bg="dark" variant="dark" sticky="top" expand="md">
       <Container>
         <Navbar.Brand as={Link} to="/">
           Royal Rentals

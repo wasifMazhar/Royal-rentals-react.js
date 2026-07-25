@@ -21,33 +21,23 @@ export default function CarCard({ car, highlightedName }) {
 
   return (
     <Card
+      className="mb-4 shadow-sm d-flex flex-column justify-content-between position-relative"
       style={{
         width: "18rem",
         height: "300px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        position: "relative",
         cursor: "pointer",
       }}
-      className="mb-4 shadow-sm"
       onClick={handleCardClick}
     >
       <div
-        style={{ position: "relative", height: "140px", overflow: "hidden" }}
+        className="position-relative overflow-hidden"
+        style={{ height: "140px" }}
       >
         <Card.Img
           variant="top"
           src={car.images[0]}
           alt={car.name}
-          width={288}
-          height={140}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            display: "block",
-          }}
+          className="w-100 h-100 object-fit-contain"
         />
       </div>
 
@@ -69,23 +59,19 @@ export default function CarCard({ car, highlightedName }) {
       </Card.Body>
 
       <span
+        className={`position-absolute bottom-0 end-0 me-2 mb-3 px-2 py-1 rounded-pill fw-semibold small border ${
+          isAvailable ? "text-success" : "text-danger"
+        }`}
         style={{
-          position: "absolute",
-          bottom: "10px",
-          right: "10px",
           zIndex: 2,
-          padding: "3px 10px",
-          borderRadius: "12px",
-          fontSize: "0.72rem",
-          fontWeight: 600,
-          color: isAvailable ? "#0f5132" : "#842029",
           backgroundColor: isAvailable
             ? "rgba(25, 135, 84, 0.18)"
             : "rgba(220, 53, 69, 0.18)",
-          border: isAvailable
-            ? "1px solid rgba(25, 135, 84, 0.35)"
-            : "1px solid rgba(220, 53, 69, 0.35)",
+          borderColor: isAvailable
+            ? "rgba(25, 135, 84, 0.35)"
+            : "rgba(220, 53, 69, 0.35)",
           backdropFilter: "blur(2px)",
+          fontSize: "0.7rem",
         }}
       >
         {isAvailable ? "Available" : "Not Available"}
