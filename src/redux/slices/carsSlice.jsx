@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosClient from "../../api/axiosClient";
 
-// Fetches the car fleet from the json-server API (db.json -> "cars")
 export const fetchCars = createAsyncThunk(
   "cars/fetchCars",
   async (_, { rejectWithValue }) => {
@@ -17,11 +16,6 @@ export const fetchCars = createAsyncThunk(
   },
 );
 
-// Called right after a booking is successfully saved. Re-reads the car's
-// current quantity from the server (in case it changed since this page
-// loaded), subtracts the number that was just rented, floors at 0, and
-// flips `available` to false once stock hits 0. Returns the updated car so
-// the reducer can patch it straight into state.list.
 export const decrementCarQuantity = createAsyncThunk(
   "cars/decrementCarQuantity",
   async ({ carId, amount }, { rejectWithValue }) => {
@@ -75,10 +69,6 @@ const carsSlice = createSlice({
           state.list[index] = updatedCar;
         }
       });
-    // Note: no .pending/.rejected handling for decrementCarQuantity on
-    // purpose — the booking itself already succeeded by the time this
-    // runs, so a failure here shouldn't show as a failed booking. It's
-    // logged/alerted from FormPage instead (see that file).
   },
 });
 

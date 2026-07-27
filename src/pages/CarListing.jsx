@@ -192,7 +192,7 @@ export default function CarListing() {
         </InputGroup>
       </div>
 
-      {/* Filters + Sorting (draft state; nothing here filters the list until Apply is clicked) */}
+      {/* Filters + Sorting */}
       <Row className="g-2 align-items-end mb-4 justify-content-center mx-0">
         <Col xs={6} sm={4} md={2}>
           <Form.Label className="small mb-1">Category</Form.Label>
@@ -341,9 +341,6 @@ export default function CarListing() {
         </p>
       )}
 
-      {/* Car Listings — justify-content-center keeps the grid centered on
-          tablet/mobile widths, including when the last row has an odd
-          number of cards left over */}
       {status === "succeeded" && (
         <Row className="g-4 justify-content-center mx-0">
           {paginatedCars.map((car) => (

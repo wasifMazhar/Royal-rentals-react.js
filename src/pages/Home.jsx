@@ -29,8 +29,6 @@ export default function Home() {
         : "0 4px 12px rgba(0,0,0,.08)",
   });
 
-  // Navigate to the listing page with a category already selected in the URL,
-  // e.g. /cars?category=Luxury — CarListing reads this on load and applies it.
   const goToCars = (category) => {
     if (category) {
       navigate(`/cars?category=${encodeURIComponent(category)}`);
@@ -43,10 +41,9 @@ export default function Home() {
     <>
       {/* HERO SECTION */}
       <section
+        className="text-white overflow-hidden"
         style={{
           background: "linear-gradient(135deg,#0d6efd,#0a58ca)",
-          color: "white",
-          overflow: "hidden",
         }}
       >
         <Container className="py-5">
@@ -85,7 +82,6 @@ export default function Home() {
                 className="img-fluid"
                 style={{
                   maxHeight: "380px",
-                  transition: ".4s",
                 }}
               />
             </Col>

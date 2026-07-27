@@ -38,9 +38,6 @@ export default function CarDetail() {
     }
   }, [id, list, selectedCar, dispatch]);
 
-  // If the selected car only has, say, 2 in stock but quantity was left at a
-  // higher value from a previous car, clamp it back down whenever the car
-  // (or its stock) changes.
   useEffect(() => {
     if (!selectedCar) return;
     const max =
@@ -78,16 +75,13 @@ export default function CarDetail() {
 
   if (!selectedCar) return <p>Loading car details...</p>;
 
-  // How many of this car are actually left. Falls back to unlimited if the
-  // record doesn't have a quantity field yet, so nothing breaks mid-migration.
-  const maxQuantity =
-    typeof selectedCar.quantity === "number" ? selectedCar.quantity : Infinity;
+  const maxQuantity = selectedCar.quantity;
   const isOutOfStock = maxQuantity <= 0;
 
   const handleQuantityChange = (e) => {
-    let value = parseInt(e.target.value, 10) || 1;
+    let value = parseInt(e.target.value, 10);
     if (value < 1) value = 1;
-    if (maxQuantity !== Infinity && value > maxQuantity) value = maxQuantity;
+    if (value > maxQuantity) value = maxQuantity;
     setQuantity(value);
   };
 
@@ -114,9 +108,6 @@ export default function CarDetail() {
     return stars;
   };
 
-  // Store the chosen quantity/days in rentalSlice so FormPage (and, after
-  // that, the stock-decrement logic) knows exactly how many units to book
-  // and subtract — previously this information never left this page.
   const handleRentClick = () => {
     dispatch(setBookingSelection({ quantity, days }));
     navigate("/rent");
